@@ -1,0 +1,92 @@
+.chat-container {
+    max-width: 800px;
+    background-color: var(--default-blue-color);
+    padding: 20px;
+    margin: auto;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.chat-container .chat-screen {
+    min-height: 60vh;
+    background-color: #FFFFFF;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 10px;
+    border-bottom: 2px solid var(--default-blue-color);
+    overflow: auto;
+}
+
+.chat-container .chat-screen .message-block {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--default-blue-color);
+    width: fit-content;
+    padding: 8px;
+    border-radius: 6px;
+    color: #FFFFFF;
+    max-width: 500px;
+    float: right;
+}
+
+.chat-container .chat-screen .message-block .username {
+    color: var(--default-yellow-color);
+    margin-bottom: 5px;
+}
+
+.chat-container .chat-screen .message-block .message {
+    font-size: 0.9rem;
+}
+
+.chat-container .chat-screen .message-block .time {
+    text-align: end;
+    font-size: 0.8rem;
+}
+
+.chat-container .chat-tools {
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.chat-container .chat-tools form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--default-blue-color);
+}
+
+.chat-container .chat-tools form .input-field {
+    margin: 0 5px;
+}
+
+.chat-container .chat-tools form .file-field label {
+    cursor: pointer;
+}
+
+.chat-container .chat-tools form .file-field input {
+    display: none;
+}
+
+.chat-container .chat-tools form .emoji-field button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    color: inherit;
+}
+
+.chat-container .chat-tools form .message-field, input {
+    width: 100%;
+}
+
+.chat-container .chat-tools form .message-field input {
+    padding: 5px;
+    border: none;
+    outline: none;
+}
