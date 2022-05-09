@@ -1,0 +1,10 @@
+.error-message-container {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.error-message-container span {
+    color: red;
+    font-size: 0.8rem;
+}

@@ -3,26 +3,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 import '../styles/Chat.css';
 
-// const socket = io("http://127.0.0.1:8080");
+const socket = io("http://127.0.0.1:8080");
 
 function Chat() {
-    // const sendMessage = () => {
-    //     socket.emit("test", "Hello World");
-    // }
-
-    // socket.on("test", (msg) => {
-    //     console.log(msg);
-    // })
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
+        socket.emit("test", "Hello World");
     }
 
     return (
         <div className="chat-container">
             <div className="chat-screen">
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
+                <div className="message-block">
+                    <span className="username">joao</span>
+                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
+                    <span className="time">19:40</span>
+                </div>
                 <div className="message-block">
                     <span className="username">joao</span>
                     <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam, ullam, harum, qui esse error dolor cumque voluptatum dolorum culpa suscipit voluptatem minus alias doloremque dignissimos repudiandae exercitationem atque corrupti at?</span>
@@ -43,7 +65,7 @@ function Chat() {
                         </button>
                     </div>
                     <div className="input-field message-field">
-                        <input type="text" name="message" id="message" placeholder="Mensagem" />
+                        <input type="text" name="message" id="message" placeholder="Mensagem" autoComplete="off" />
                     </div>
                 </form>
             </div>

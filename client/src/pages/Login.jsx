@@ -1,8 +1,21 @@
 import '../styles/Form.css';
 
 function Login() {
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const cfg = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "username": e.target.querySelector("#username").value,
+                "password": e.target.querySelector("#password").value
+            })
+        }
+
+        await fetch("http://127.0.0.1:8080/login", cfg);
     }
 
     return (

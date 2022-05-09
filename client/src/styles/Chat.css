@@ -12,6 +12,7 @@
 
 .chat-container .chat-screen {
     min-height: 60vh;
+    max-height: 650px;
     background-color: #FFFFFF;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -30,6 +31,7 @@
     color: #FFFFFF;
     max-width: 500px;
     float: right;
+    margin: 5px 0;
 }
 
 .chat-container .chat-screen .message-block .username {
@@ -89,4 +91,19 @@
     padding: 5px;
     border: none;
     outline: none;
+}
+
+@media screen and (max-width: 968px) {
+    .chat-container .chat-screen .message-block .username {
+        font-size: 0.9rem;
+    }
+
+    .chat-container .chat-screen .message-block .message {
+        font-size: 0.8rem;
+    }
+    
+    .chat-container .chat-screen .message-block .time {
+        text-align: end;
+        font-size: 0.7rem;
+    }
 }

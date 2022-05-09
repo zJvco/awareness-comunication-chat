@@ -1,8 +1,44 @@
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+
+import ErrorMessage from "../components/ErrorMessage";
+
 import '../styles/Form.css';
 
 function Register() {
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const [errorMsg, setErrorMsg] = useState();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const cfg = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "username": e.target.querySelector("#username").value,
+                "email": e.target.querySelector("#email").value,
+                "password": e.target.querySelector("#password").value,
+                "confirm_password": e.target.querySelector("#confirm-password").value
+            })
+        }
+
+        try {
+            const res = await fetch("http://127.0.0.1:8080/cadastro", cfg);
+            
+            if (!res.ok) {
+                throw new Error(await res.text());
+            }
+            
+            navigate("/login");
+        }
+        catch (error) {
+            setErrorMsg(error.message);
+        }
+
     }
 
     return (
@@ -28,6 +64,7 @@ function Register() {
                     <label htmlFor="confirm-password">Confirmar Senha</label>
                     <input type="password" name="confirm-password" id="confirm-password" />
                 </div>
+                {errorMsg ? <ErrorMessage message={errorMsg} /> : null}
                 <div className="submit-field">
                     <input type="submit" value="Cadastrar-se" />
                 </div>
