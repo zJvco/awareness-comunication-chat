@@ -1,16 +1,32 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 import '../styles/Chat.css';
 
+import { apiUrl } from '../constants/apiCredentials';
+import { checkIsAuthenticated } from '../utils/auth';
+
 const socket = io("http://127.0.0.1:8080");
 
 function Chat() {
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         socket.emit("test", "Hello World");
     }
+
+    useEffect(() => {
+        checkIsAuthenticated(localStorage.getItem("token_jwt"))
+            .then(authenticated => {
+                if (!authenticated) {
+                    navigate("/login");
+                }
+            });
+    }, []);
 
     return (
         <div className="chat-container">

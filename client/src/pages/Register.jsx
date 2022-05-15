@@ -1,19 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
 import ErrorMessage from "../components/ErrorMessage";
 
 import '../styles/Form.css';
 
+import { apiUrl } from '../constants/apiCredentials';
+import { checkIsAuthenticated } from '../utils/auth';
+
 function Register() {
     const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState();
 
+    useEffect(() => {
+        checkIsAuthenticated(localStorage.getItem("token_jwt"))
+            .then(authenticated => {
+                if (authenticated) {
+                    navigate("/");
+                }
+            });
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const cfg = {
+        const config = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +39,7 @@ function Register() {
         }
 
         try {
-            const res = await fetch("http://127.0.0.1:8080/cadastro", cfg);
+            const res = await fetch(`${apiUrl}/cadastro`, config);
             
             if (!res.ok) {
                 throw new Error(await res.text());

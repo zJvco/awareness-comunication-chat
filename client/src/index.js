@@ -6,7 +6,8 @@ import {
   faHome,
   faUser,
   faFaceSmile,
-  faPaperclip
+  faPaperclip,
+  faSignOut
 } from '@fortawesome/free-solid-svg-icons';
 
 import App from './App';
@@ -18,7 +19,8 @@ library.add(
   faHome,
   faUser,
   faFaceSmile,
-  faPaperclip
+  faPaperclip,
+  faSignOut
 )
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
