@@ -1,5 +1,5 @@
 import jwt
-from flask import Blueprint, request, current_app
+from flask import Blueprint, jsonify, request, current_app
 
 from .models import User
 from .extensions import db
@@ -14,18 +14,31 @@ def login():
     password = request.json["password"]
 
     if not email or not password:
-        return "Preencha todos os campos", 400
+        return jsonify({
+            "error": "Preencha todos os campos"
+        }), 400
 
     user = User.query.filter_by(email=email).first()
 
     if not user or password != user.password:
-        return "E-mail ou senha incorretos", 400
+        return jsonify({
+            "error": "E-mail ou senha incorretos"
+        }), 400
 
     token = jwt.encode({
         "user_id": user.id
     }, current_app.config["SECRET_KEY"])
 
-    return token, 201
+    res = {
+        "user": {
+            "username": user.username,
+            "email": user.email,
+            "password": user.password
+        },
+        "token": token
+    }
+
+    return jsonify(res), 201
 
 
 @main_bp.route("/cadastro", methods=["POST"])
@@ -36,13 +49,19 @@ def register():
     confirm_password = request.json["confirm_password"]
 
     if not username or not email or not password or not confirm_password:
-        return "Preencha todos os campos", 400
+        return jsonify({
+            "error": "Preencha todos os campos"
+        }), 400
 
     if password != confirm_password:
-        return "As senhas não são iguais", 400
+        return jsonify({
+            "error": "As senhas não são iguais"
+        }), 400
 
     if db.session.query(User).filter_by(email=email).first():
-        return "E-mail de usuário já existe", 400
+        return jsonify({
+            "error": "E-mail de usuário já existe"
+        }), 400
 
     user = User(
         username=username,
@@ -53,17 +72,25 @@ def register():
     try:
         db.session.add(user)
         db.session.commit()
-    except Exception as e:
+    except:
         db.session.rollback()
-        return "Falha no servidor ao tentar cadastro um usuário", 500
 
-    return "Usuário criado com sucesso", 201
+        return jsonify({
+            "error": "Falha no servidor ao tentar cadastro um usuário"
+        }), 500
+
+    return jsonify({
+        "Usuário criado com sucesso"
+    }), 201
 
     
 @main_bp.route("/auth")
 @token_required
 def index(current_user):
-    if not current_user:
-        return "Usuário inexistente ao tentar autenticar", 400
+    res = {
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email
+    }
 
-    return "Usuário autenticado", 202
+    return jsonify(res), 200

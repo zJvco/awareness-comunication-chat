@@ -1,5 +1,6 @@
 header {
     display: flex;
+    align-items: center;
     padding: 20px 10px;
 }
 
@@ -24,5 +25,16 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
+    color: var(--default-yellow-color);
+}
+
+header .userInfo {
+    position: absolute;
+    right: 2%;
+    white-space: nowrap;
+}
+
+header .userInfo span {
+    font-weight: bold;
     color: var(--default-yellow-color);
 }

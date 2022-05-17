@@ -1,30 +1,19 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ErrorMessage from '../components/ErrorMessage';
 
 import { apiUrl } from '../constants/apiCredentials';
-import { checkIsAuthenticated } from '../utils/auth';
+import { AuthContext } from '../context/Auth';
 
 import '../styles/Form.css';
-
-import { AuthContext } from "../context/Auth";
 
 function Login() {
     const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState();
 
-    const { setIsAuth } = useContext(AuthContext);
-
-    useEffect(() => {
-        checkIsAuthenticated(localStorage.getItem("token_jwt"))
-            .then(authenticated => {
-                if (authenticated) {
-                    navigate("/");
-                }
-            });
-    }, []);
+    const { setUser, setAuthenticated } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,18 +31,19 @@ function Login() {
 
         try {
             const res = await fetch(`${apiUrl}/login`, config);
-            const token = await res.text();
+            const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(token);
+                throw new Error(data.error);
             }
-            else {
-                localStorage.setItem("token_jwt", token);
-    
-                setIsAuth(true);
 
-                navigate("/");
-            }
+            localStorage.setItem("token_jwt", data.token);
+
+            setAuthenticated(true);
+
+            setUser(data.user);
+
+            navigate("/");
         }
         catch (error) {
             setErrorMsg(error.message);

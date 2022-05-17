@@ -6,21 +6,11 @@ import ErrorMessage from "../components/ErrorMessage";
 import '../styles/Form.css';
 
 import { apiUrl } from '../constants/apiCredentials';
-import { checkIsAuthenticated } from '../utils/auth';
 
 function Register() {
     const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState();
-
-    useEffect(() => {
-        checkIsAuthenticated(localStorage.getItem("token_jwt"))
-            .then(authenticated => {
-                if (authenticated) {
-                    navigate("/");
-                }
-            });
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,9 +30,10 @@ function Register() {
 
         try {
             const res = await fetch(`${apiUrl}/cadastro`, config);
-            
+            const data = await res.json();
+
             if (!res.ok) {
-                throw new Error(await res.text());
+                throw new Error(data.error);
             }
             
             navigate("/login");

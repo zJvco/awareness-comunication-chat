@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import './styles/App.css';
@@ -9,20 +9,11 @@ import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-import { AuthContext } from './context/Auth'
-
-import { checkIsAuthenticated } from "./utils/auth";
+import { AuthProvider } from './context/Auth'
 
 function App() {
-    const [isAuth, setIsAuth] = useState();
-
-    useEffect(() => {
-        checkIsAuthenticated(localStorage.getItem("token_jwt"))
-            .then(res => setIsAuth(res));
-    }, []);
-
     return (
-        <AuthContext.Provider value={{ isAuth, setIsAuth }}>
+        <AuthProvider>
             <Router>
                 <Header />
                 <main>
@@ -34,7 +25,7 @@ function App() {
                     </Routes>
                 </main>
             </Router>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 

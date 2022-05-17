@@ -1,7 +1,6 @@
 from .extensions import sio
 
 
-@sio.on("test")
+@sio.on("message")
 def message(msg):
-    print(msg)
-    sio.emit("test", msg)
+    sio.emit("message", msg)

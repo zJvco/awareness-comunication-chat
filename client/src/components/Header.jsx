@@ -5,18 +5,8 @@ import '../styles/Header.css'
 
 import { AuthContext } from "../context/Auth";
 
-import { logout } from "../utils/auth";
-
 function Header() {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
-
-    const handleLogoutClick = (e) => {
-        e.preventDefault();
-
-        logout();
-
-        setIsAuth(false);
-    }
+    const { user, authenticated, handleLogout } = useContext(AuthContext);
 
     return (
         <header>
@@ -34,12 +24,12 @@ function Header() {
                     </li>
                     <li>
                         {
-                            !isAuth ? (
+                            !authenticated ? (
                                 <a href="/login">
                                     <FontAwesomeIcon icon="fa-solid fa-user" />
                                 </a>
                             ) : (
-                                <a href="/#" onClick={handleLogoutClick}>
+                                <a href="/#" onClick={handleLogout}>
                                     <FontAwesomeIcon icon="fas fa-sign-out" />
                                 </a>
                             )
@@ -47,6 +37,9 @@ function Header() {
                     </li>
                 </ul>
             </nav>
+            {
+                authenticated ? <span className="userInfo">Olá, <span>{ user ? user.username : "" }</span></span> : null
+            }
         </header>
     );
 }
