@@ -4,9 +4,9 @@ import { availableEmojisCode } from '../constants/availableEmojis';
 
 import '../styles/EmojiList.css';
 
-function EmojiList() {
+function EmojiList({ message, setMessage }) {
     const handleEmojiClick = (e) => {
-        console.log(e.target)
+        setMessage(message + e.target.innerText);
     }
 
     return (

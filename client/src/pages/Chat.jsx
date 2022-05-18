@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
@@ -13,36 +12,64 @@ const socket = io("http://127.0.0.1:8080");
 
 function Chat() {
     const [showEmojiList, setShowEmojiList] = useState(false);
+    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState([]);
 
     const { user } = useContext(AuthContext);
+    
+    useEffect(() => {
+        socket.on("message", (message) => {
+            setMessages([...messages, message]);
+        });
+    }, [messages]);
+
+    // useEffect(() => {
+    //     socket.on("connect", () => {
+    //         socket.emit("join", `Usuário ${user.username} conectado!`);
+    //     });
+    // }, [user]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const message = e.target.querySelector("#message").value;
+        if (!message) {
+            return;
+        }
 
-        socket.emit("message", message);
+        const date = new Date();
+        const fdate = date.getHours() + ":" + date.getMinutes();
+
+        socket.emit("message", {
+            "id": user.id,
+            "username": user.username,
+            "message": message,
+            "time": fdate
+        });
+
+        setMessage("");
     }
-
-    socket.on("message", (message) => {
-        console.log(message);
-    });
 
     const handleEmojiClickList = () => {
         setShowEmojiList(!showEmojiList);
     }
-    
+
     return (
         <div className="chat-container">
             <div className="chat-screen">
-                <div className="message-block">
-                    <span className="username">João</span>
-                    <span className="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum ipsa quasi quod quibusdam odit modi amet accusantium dolore, similique eligendi quaerat sapiente repellendus placeat quo suscipit nostrum totam fugit in!</span>
-                    <span className="time">10:45</span>
-                </div>
+                {messages.map((msg, index) => {
+                    return (
+                        <div className="message-block" key={index}>
+                            <div className="message-content" style={{ float: msg.id == user.id ? "right" : "left" }}>
+                                <span className="username-display">{msg.username}</span>
+                                <span className="message-display">{msg.message}</span>
+                                <span className="time-display">{msg.time}</span>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
             <div className="chat-tools">
-                <form action="/asdasdasdasdas" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="input-field file-field">
                         <label htmlFor="file">
                             <FontAwesomeIcon icon="fa-solid fa-paperclip" />
@@ -55,13 +82,16 @@ function Chat() {
                         </button>
                     </div>
                     <div className="input-field message-field">
-                        <input type="text" name="message" id="message" placeholder="Mensagem" autoComplete="off" />
+                        <input type="text" name="message" id="message" placeholder="Mensagem" autoComplete="off" value={message} onChange={e => setMessage(e.target.value)} />
+                    </div>
+                    <div className="input-field submit-field">
+                        <button type="submit">
+                            <FontAwesomeIcon icon="fas fa-paper-plane" />
+                        </button>
                     </div>
                 </form>
                 {
-                    showEmojiList ? (
-                        <EmojiList />
-                    ) : null
+                    showEmojiList ? <EmojiList message={message} setMessage={setMessage} /> : null
                 }
             </div>
         </div>

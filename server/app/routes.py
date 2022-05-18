@@ -80,7 +80,7 @@ def register():
         }), 500
 
     return jsonify({
-        "Usuário criado com sucesso"
+        "message": "Usuário criado com sucesso"
     }), 201
 
     

@@ -40,7 +40,7 @@ function Login() {
             localStorage.setItem("token_jwt", data.token);
 
             setAuthenticated(true);
-
+            
             setUser(data.user);
 
             navigate("/");
