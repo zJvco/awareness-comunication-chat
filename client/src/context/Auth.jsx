@@ -7,6 +7,7 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
     const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token_jwt");
@@ -15,6 +16,8 @@ function AuthProvider({ children }) {
             validateToken(token);
             setAuthenticated(true);
         }
+
+        setLoading(false);
     }, []);
 
     const validateToken = async (token) => {
@@ -44,6 +47,10 @@ function AuthProvider({ children }) {
         localStorage.removeItem("token_jwt");
 
         setAuthenticated(false);
+    }
+
+    if (loading) {
+        return;
     }
 
     return (

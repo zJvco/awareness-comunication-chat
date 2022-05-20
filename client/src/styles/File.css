@@ -1,0 +1,12 @@
+.file-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    background-color: var(--default-blue-color);
+    border-radius: 6px;
+    padding: 15px;
+    color: #FFFFFF;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}

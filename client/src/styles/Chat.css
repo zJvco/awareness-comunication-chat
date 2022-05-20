@@ -1,9 +1,8 @@
 .chat-container {
-    max-width: 800px;
     background-color: var(--default-blue-color);
     padding: 20px;
     margin: auto;
-    border-radius: 12px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,14 +12,22 @@
 .chat-container .chat-screen {
     display: flex;
     flex-direction: column;
-    min-height: 60vh;
-    max-height: 650px;
+    height: 80vh;
     background-color: #FFFFFF;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     padding: 10px;
     border-bottom: 2px solid var(--default-blue-color);
     overflow: auto;
+}
+
+.chat-container .chat-screen .file-content {
+    margin: 5px 0;
+}
+
+.chat-container .chat-screen .file-content a {
+    text-decoration: none;
+    color: unset;
 }
 
 .chat-container .chat-screen .message-content {
@@ -32,7 +39,6 @@
     border-radius: 6px;
     color: #FFFFFF;
     max-width: 500px;
-    min-width: 100px;
     float: left;
     margin: 5px 0;
 }
@@ -40,11 +46,11 @@
 .chat-container .chat-screen .message-content .username-display {
     color: var(--default-yellow-color);
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
 .chat-container .chat-screen .message-content .message-display {
     font-size: 0.9rem;
+    margin: 4px 0;
 }
 
 .chat-container .chat-screen .message-content .time-display {

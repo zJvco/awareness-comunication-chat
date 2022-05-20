@@ -6,6 +6,6 @@ def message(msg):
     sio.emit("message", msg)
 
 
-# @sio.on("join")
-# def connect(msg):
-#     sio.emit("join", msg)
+@sio.on("file-upload")
+def file_upload(msg):
+    sio.emit("file-upload", msg)

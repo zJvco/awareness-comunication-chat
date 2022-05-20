@@ -10,6 +10,7 @@ importlib-metadata==4.11.3
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.1
+PyJWT==2.4.0
 python-engineio==4.3.2
 python-socketio==5.6.0
 simple-websocket==0.5.2
