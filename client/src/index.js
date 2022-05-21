@@ -14,7 +14,7 @@ import {
 
 import App from './App';
 
-import './styles/index.css'
+import './styles/index.css';
 
 library.add(
   faComments,

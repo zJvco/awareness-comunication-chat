@@ -39,7 +39,8 @@ function AuthProvider({ children }) {
             setUser(data);
         }
         catch (error) {
-            console.log(error.message)
+            console.log(error.message);
+            setLoading(true);
         }
     }
 

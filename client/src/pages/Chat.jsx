@@ -20,9 +20,12 @@ function Chat() {
     const [messages, setMessages] = useState([]);
  
     const { user, authenticated } = useContext(AuthContext);
-    
+
     useEffect(() => {
         if (!authenticated) navigate("/login");
+
+        const chatScreenEl = document.querySelector(".chat-screen");
+        chatScreenEl.scrollTo(0, chatScreenEl.scrollHeight);
 
         socket.on("message", (message) => {
             setMessages([...messages, message]);
