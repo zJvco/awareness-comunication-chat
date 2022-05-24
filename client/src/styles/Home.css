@@ -4,6 +4,7 @@ section {
 
 section h2 {
     color: var(--default-blue-color);
+    margin: 20px 0;
 }
 
 section p {

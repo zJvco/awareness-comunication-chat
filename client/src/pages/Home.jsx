@@ -19,7 +19,7 @@ function Home() {
                 allowfullscreen></iframe>
             </section>
             <section>
-                <h2>Sobre o Meio Ambiente e Nossa Causa</h2>
+                <h2 style={{textAlign: "center"}}>Sobre o Meio Ambiente e Nossa Causa</h2>
                 <p>Segundo a ANA (Agência Nacional de Águas), em 2019 o Brasil possuiu 83.450 quilômetros de rios poluídos.</p>
                 <p>A poluição das indústrias causadas em rios, é um grave problema ao meio ambiente, que leva não só a perca da vida marinha, como também a nossa. Os efluentes (resíduos de origem da atividade, como o industrial), essa contaminação pode causar doenças como infecções gastrointestinais, cólera e hepatites.</p>
                 <p>Por isso o tratamento e prevenção dos rios é tão importante para o meio ambiente, é importante garantimos que as indústrias estão fazendo o devido tratamento nos efluentes que produzem.</p>
