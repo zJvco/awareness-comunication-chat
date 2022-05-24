@@ -1,0 +1,19 @@
+section {
+    margin: 25px 0;
+}
+
+section h2 {
+    color: var(--default-blue-color);
+}
+
+section p {
+    margin: 8px 0;
+}
+
+section ul {
+    margin: 0 20px;
+}
+
+section ul li {
+    margin: 10px 0;
+}
